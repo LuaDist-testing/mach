@@ -33,6 +33,9 @@ end
 local function create_expectation(_, method)
   return function(self, ...)
     local expectation = Expectation(handle_mock_calls, self)
+    if not expectation[method] then
+      error("attempt to call a nil value (field '" .. method .. "')", 2)
+    end
     return expectation[method](expectation, ...)
   end
 end
@@ -105,7 +108,7 @@ function mach.match(value, matcher)
 end
 
 function mach.ignore_mocked_calls_when(thunk)
-  subscriber = load''
+  subscriber = function() end
   thunk()
   subscriber = unexpected_call
 end
