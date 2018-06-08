@@ -1,10 +1,10 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = 'mach'
-version = '4.4-0'
+version = '4.4-1'
 -- LuaDist source
 source = {
-  tag = "4.4-0",
+  tag = "4.4-1",
   url = "git://github.com/LuaDist-testing/mach.git"
 }
 -- Original source
@@ -30,6 +30,7 @@ build = {
     ['mach.unexpected_call_error'] = 'mach/unexpected_call_error.lua',
     ['mach.unexpected_args_error'] = 'mach/unexpected_args_error.lua',
     ['mach.out_of_order_call_error'] = 'mach/out_of_order_call_error.lua',
+    ['mach.not_all_calls_occurred_error'] ='mach/not_all_calls_occurred_error.lua',
     ['mach.format_call_status'] = 'mach/format_call_status.lua',
     ['mach.format_arguments'] = 'mach/format_arguments.lua',
     ['mach.deep_compare_matcher'] = 'mach/deep_compare_matcher.lua',
