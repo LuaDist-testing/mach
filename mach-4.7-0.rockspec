@@ -1,16 +1,16 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = 'mach'
-version = '4.6-0'
+version = '4.7-0'
 -- LuaDist source
 source = {
-  tag = "4.6-0",
+  tag = "4.7-0",
   url = "git://github.com/LuaDist-testing/mach.git"
 }
 -- Original source
 -- source = {
---   url = 'https://github.com/ryanplusplus/mach.lua/archive/v4.6-0.tar.gz',
---   dir = 'mach.lua-4.6-0/src'
+--   url = 'https://github.com/ryanplusplus/mach.lua/archive/v4.7-0.tar.gz',
+--   dir = 'mach.lua-4.7-0/src'
 -- }
 description = {
   summary = 'Simple mocking framework for Lua inspired by CppUMock and designed for readability.',
@@ -33,6 +33,7 @@ build = {
     ['mach.not_all_calls_occurred_error'] ='mach/not_all_calls_occurred_error.lua',
     ['mach.format_call_status'] = 'mach/format_call_status.lua',
     ['mach.format_arguments'] = 'mach/format_arguments.lua',
+    ['mach.format_value'] = 'mach/format_value.lua',
     ['mach.deep_compare_matcher'] = 'mach/deep_compare_matcher.lua',
     ['mach.match'] = 'mach/match.lua',
     ['mach.any'] = 'mach/any.lua',
