@@ -1,8 +1,10 @@
-return function(name, args, level)
-  local arg_strings = {}
-  for _, arg in ipairs(args) do
-    table.insert(arg_strings, tostring(arg))
-  end
+local format_call_status = require 'mach.format_call_status'
+local format_arguments = require 'mach.format_arguments'
 
-  error('unexpected arguments (' .. table.concat(arg_strings) .. ') provided to function ' .. name, level + 1)
+return function(name, args, completed_calls, incomplete_calls, level)
+  local error_message =
+    'Unexpected arguments ' .. format_arguments(args) .. ' provided to function ' .. name ..
+    format_call_status(completed_calls, incomplete_calls)
+
+  error(error_message, level + 1)
 end
