@@ -1,16 +1,16 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = 'mach'
-version = '1.0-1'
+version = '2.0-0'
 -- LuaDist source
 source = {
-  tag = "1.0-1",
+  tag = "2.0-0",
   url = "git://github.com/LuaDist-testing/mach.git"
 }
 -- Original source
 -- source = {
---   url = 'https://github.com/ryanplusplus/mach.lua/archive/v1.0-1.tar.gz',
---   dir = 'mach.lua-1.0-1/src'
+--   url = 'https://github.com/ryanplusplus/mach.lua/archive/v2.0-0.tar.gz',
+--   dir = 'mach.lua-2.0-0/src'
 -- }
 description = {
   summary = 'Simple mocking framework for Lua inspired by CppUMock and designed for readability.',
@@ -18,13 +18,15 @@ description = {
   license = 'MIT <http://opensource.org/licenses/MIT>'
 }
 dependencies = {
-  'lua >= 5.1'
+  'lua >= 5.2'
 }
 build = {
   type = 'builtin',
   modules = {
     ['mach'] = 'mach.lua',
-    ['mach.expectation'] = 'mach/expectation.lua',
-    ['mach.expected-call'] = 'mach/expected-call.lua',
+    ['mach.Expectation'] = 'mach/Expectation.lua',
+    ['mach.ExpectedCall'] = 'mach/ExpectedCall.lua',
+    ['mach.unexpected_call_error'] = 'mach/unexpected_call_error.lua',
+    ['mach.unexpected_args_error'] = 'mach/unexpected_args_error.lua',
   }
 }
