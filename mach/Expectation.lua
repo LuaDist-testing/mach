@@ -8,12 +8,13 @@ local not_all_calls_occurred_error = require 'mach.not_all_calls_occurred_error'
 local expectation = {}
 expectation.__index = expectation
 
-local function create(m)
+local function create(handle_mock_calls, m)
   local o = {
     _m = m,
     _call_specified = false,
     _calls = {},
-    _completed_calls = {}
+    _completed_calls = {},
+    _handle_mock_calls = handle_mock_calls
   }
 
   setmetatable(o, expectation)
@@ -93,7 +94,7 @@ function expectation:when(thunk)
     end
   end
 
-  handle_mock_calls(called, thunk)
+  self._handle_mock_calls(called, thunk)
 
   for _, call in pairs(self._calls) do
     if call:is_required() then
@@ -195,5 +196,7 @@ function expectation:and_other_calls_should_be_ignored()
   self._ignore_other_calls = true
   return self
 end
+
+expectation.with_other_calls_ignored = expectation.and_other_calls_should_be_ignored
 
 return create
