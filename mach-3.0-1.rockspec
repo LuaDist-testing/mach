@@ -1,16 +1,16 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = 'mach'
-version = '3.0-0'
+version = '3.0-1'
 -- LuaDist source
 source = {
-  tag = "3.0-0",
+  tag = "3.0-1",
   url = "git://github.com/LuaDist-testing/mach.git"
 }
 -- Original source
 -- source = {
---   url = 'https://github.com/ryanplusplus/mach.lua/archive/v3.0-0.tar.gz',
---   dir = 'mach.lua-3.0-0/src'
+--   url = 'https://github.com/ryanplusplus/mach.lua/archive/v3.0-1.tar.gz',
+--   dir = 'mach.lua-3.0-1/src'
 -- }
 description = {
   summary = 'Simple mocking framework for Lua inspired by CppUMock and designed for readability.',
@@ -18,7 +18,7 @@ description = {
   license = 'MIT <http://opensource.org/licenses/MIT>'
 }
 dependencies = {
-  'lua >= 5.2'
+  'lua >= 5.1'
 }
 build = {
   type = 'builtin',
