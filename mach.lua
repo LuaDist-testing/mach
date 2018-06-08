@@ -20,15 +20,24 @@ function mock_called(m, name, args)
   return subscriber(m, name, args)
 end
 
+function create_expectation(_, method)
+  return function(self, ...)
+    local expectation = Expectation(self)
+    return expectation[method](expectation, ...)
+  end
+end
+
 function mach.mock_function(name)
   name = name or '<anonymous>'
   local f = {}
 
-  function fCall(_, ...)
-    return mock_called(f, name, table.pack(...))
-  end
+  setmetatable(f, {
+    __call = function(_, ...)
+      return mock_called(f, name, table.pack(...))
+    end,
 
-  setmetatable(f, {__call = fCall})
+    __index = create_expectation
+  })
 
   return f
 end
@@ -37,17 +46,19 @@ function mach.mock_method(name)
   name = name or '<anonymous>'
   local m = {}
 
-  function mCall(_, _, ...)
-    local args = table.pack(...)
-    return mock_called(m, name, args)
-  end
+  setmetatable(m, {
+    __call = function(_, _, ...)
+      local args = table.pack(...)
+      return mock_called(m, name, args)
+    end,
 
-  setmetatable(m, {__call = mCall})
+    __index = create_expectation
+  })
 
   return m
 end
 
-function isCallable(x)
+function is_callable(x)
   local is_function = type(x) == 'function'
   local has_call_metamethod = type((debug.getmetatable(x) or {}).__call) == 'function'
   return is_function or has_call_metamethod
@@ -58,7 +69,7 @@ function mach.mock_table(t, name)
   local mocked = {}
 
   for k, v in pairs(t) do
-    if isCallable(v) then
+    if is_callable(v) then
       mocked[k] = mach.mock_function(name .. '.' .. tostring(k))
     end
   end
@@ -71,7 +82,7 @@ function mach.mock_object(o, name)
   local mocked = {}
 
   for k, v in pairs(o) do
-    if isCallable(v) then
+    if is_callable(v) then
       mocked[k] = mach.mock_method(name .. ':' .. tostring(k))
     end
   end
@@ -79,6 +90,4 @@ function mach.mock_object(o, name)
   return mocked
 end
 
-setmetatable(mach, { __call = function(_, ...) return Expectation(...) end })
-
-return mach
+return setmetatable(mach, { __call = function(_, ...) return Expectation(...) end })
